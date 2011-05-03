@@ -10,6 +10,8 @@ before do
     config.oauth_token        = OAUTH_TOKEN
     config.oauth_token_secret = OAUTH_TOKEN_SECRET
   end
+
+  client = Twitter::Client.new
 end
 
 get '/:id/:tweet' do
@@ -18,7 +20,6 @@ get '/:id/:tweet' do
   time   = Time.now
   str    = "@noize_hiokiにかわって@#{guest}がtweet! 「#{tweet}」 at #{time}"
 
-  client = Twitter::Client.new
   client.update(str)
   "Tweet complete!"
 end
