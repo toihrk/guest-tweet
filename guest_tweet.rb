@@ -2,14 +2,17 @@
 require "rubygems"
 require "sinatra"
 require "twitter"
+require "yaml"
 
 before do
+  env = YAML.load(File.open(File.dirname(__FILE__)+'/config.yml'))
   Twitter.configure do |config|
-    config.consumer_key       = CONSUMER_KEY
-    config.consumer_secret    = CONSUMER_SECRET
-    config.oauth_token        = OAUTH_TOKEN
-    config.oauth_token_secret = OAUTH_TOKEN_SECRET
+    config.consumer_key       = env["consumer_key"]
+    config.consumer_secret    = env["consumer_secret"]
+    config.oauth_token        = env["oauth_token"]
+    config.oauth_token_secret = env["oauth_token_secret"]
   end
+
   @client = Twitter::Client.new
 end
 
@@ -18,6 +21,7 @@ get '/:id/:tweet' do
   tweet  = URI.unescape(params[:tweet])
   time   = Time.now
   str    = "@noize_hiokiにかわって@#{guest}がtweet! 「#{tweet}」 at #{time}"
+
   @client.update(str)
   "Tweet complete!"
 end
