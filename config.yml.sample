@@ -1,0 +1,5 @@
+--- 
+oauth_token_secret: # Your oauth_token_secret
+consumer_key:       # Your consumer key
+consumer_secret:    # Your consumer secret
+oauth_token:　　　　　# Your oauth token
