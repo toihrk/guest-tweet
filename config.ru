@@ -1,0 +1,1 @@
+require 'guest_tweet' ; run Sinatra::Application
